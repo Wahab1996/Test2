@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>جرعتي – حاسبة جرعات أدوية الأطفال</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 28px;
+    }
+    label, select, input {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    input, select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .result {
+      background: #e8f5e9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1b5e20;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #388e3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>💊 تطبيق جرعتي – حاسبة جرعات أدوية الأطفال</h1>
+</header>
+
+<main>
+  <label for="drug">اختر الدواء:</label>
+  <select id="drug"></select>
+
+  <label for="weight">وزن الطفل (كجم):</label>
+  <input type="number" id="weight" placeholder="مثال: 15">
+
+  <label for="dosePerKg">الجرعة الموصى بها (ملجم/كجم):</label>
+  <input type="number" id="dosePerKg" placeholder="اختياري (سيُستخدم الافتراضي إن وُجد)">
+
+  <div class="result" id="doseResult">💡 أدخل البيانات ثم اضغط احسب</div>
+  <button onclick="calculateDose()">🔍 احسب الجرعة</button>
+  <button onclick="copyDose()">📋 نسخ الجرعة</button>
+</main>
+
+<footer>
+  تم بواسطة: د. عبدالوهاب عبد المنان الشيخ – طبيب طوارئ أطفال، طموح طبيب أسرة<br>
+  مطور تطبيق جرعتي<br>
+  المراجع العلمية: UpToDate, BMJ, AMBOSS, Saudi Guidelines, Medscape
+</footer>
+
+<script>
+  const drugs = [
+    { name: "باراسيتامول (فيفادول)", concentration: 120, dosePerKg: 15 },
+    { name: "ايبوبروفين (بروفين)", concentration: 100, dosePerKg: 10 },
+    { name: "أموكسيسيلين (أموكسيل)", concentration: 250, dosePerKg: 25 },
+    { name: "أوجمنتين (كلافولانات)", concentration: 312.5, dosePerKg: 25 },
+    { name: "سيفيكسيم (سوبراكس)", concentration: 100, dosePerKg: 8 },
+    { name: "سيفوروكسيم (زينات)", concentration: 125, dosePerKg: 10 },
+    { name: "أزيثرومايسين (أزيماك)", concentration: 200, dosePerKg: 10 },
+    { name: "ميترونيدازول (فلاجيل)", concentration: 125, dosePerKg: 30 },
+    { name: "لوراتادين (كلاريتين)", concentration: 5, dosePerKg: 0.1 },
+    { name: "سيتريزين (زيرتك)", concentration: 5, dosePerKg: 0.25 },
+    { name: "مونتيلوكاست (سينجولير)", concentration: 4, dosePerKg: 0.2 },
+    { name: "فنتولين شراب", concentration: 2, dosePerKg: 0.15 },
+    { name: "بريديزولون (بيديابريد)", concentration: 5, dosePerKg: 1 },
+    { name: "ديكساميثازون (ديكازون)", concentration: 0.5, dosePerKg: 0.15 },
+    { name: "أوندانسيترون (زوفـران)", concentration: 4, dosePerKg: 0.15 },
+    { name: "ديازيبام (ستيسوليد)", concentration: 5, dosePerKg: 0.3 },
+    { name: "نيستاتين (مايكوستاتين)", concentration: 100, dosePerKg: 0 },
+    { name: "زينك (زينكات)", concentration: 10, dosePerKg: 0 },
+    { name: "دومبيريدون (موتيليوم)", concentration: 1, dosePerKg: 0.25 },
+    { name: "ORS محلول جفاف", concentration: 0, dosePerKg: 0 },
+    { name: "لوراسيدون (لوراكس)", concentration: 10, dosePerKg: 0.5 },
+    { name: "كلورفينيرامين (بيريتون)", concentration: 2, dosePerKg: 0.1 },
+    { name: "فينوكسينازين (فينوكس)", concentration: 5, dosePerKg: 0.25 },
+    { name: "ريفامبيسين (ريفادين)", concentration: 100, dosePerKg: 10 },
+    { name: "إرثروميسين (إريثروسين)", concentration: 125, dosePerKg: 10 },
+    { name: "نيوروفين (ايبوبروفين)", concentration: 100, dosePerKg: 10 },
+    { name: "تاميفلو (أوسيلتاميفير)", concentration: 12, dosePerKg: 3 },
+    { name: "كلورال هيدرات (نوزين)", concentration: 250, dosePerKg: 50 },
+    { name: "كيتوتفين (زاديتين)", concentration: 1, dosePerKg: 0.05 },
+    { name: "ديكلوفيناك (فولتارين)", concentration: 12.5, dosePerKg: 1 },
+    { name: "أمينوفيللين", concentration: 25, dosePerKg: 6 },
+    { name: "كافيين سترات", concentration: 20, dosePerKg: 10 },
+    { name: "ألبرازولام (زاناكس)", concentration: 0.25, dosePerKg: 0.01 },
+    { name: "هيدروكسيزين (أتاراكس)", concentration: 10, dosePerKg: 1 },
+    { name: "رانيتيدين (زانتاك)", concentration: 15, dosePerKg: 2 },
+    { name: "لاموتريجين", concentration: 2.5, dosePerKg: 1 },
+    { name: "آيبوتيناميد (أبيمول)", concentration: 120, dosePerKg: 15 },
+    { name: "تيجريتول (كاربامازيبين)", concentration: 100, dosePerKg: 10 },
+    { name: "أوكسيبوتينين (ديتروبان)", concentration: 5, dosePerKg: 0.2 },
+    { name: "سيفترياكسون", concentration: 1000, dosePerKg: 50 },
+    { name: "بانتوبرادول (كونترولوك)", concentration: 40, dosePerKg: 1 },
+    { name: "سبيرونولاكتون", concentration: 25, dosePerKg: 2 },
+    { name: "فيورازوليدون", concentration: 100, dosePerKg: 5 },
+    { name: "كليندامايسين", concentration: 75, dosePerKg: 10 },
+    { name: "مرهيندرول", concentration: 2, dosePerKg: 0.1 },
+    { name: "كيتوكونازول", concentration: 200, dosePerKg: 5 },
+    { name: "سيبروفلوكساسين", concentration: 250, dosePerKg: 15 },
+    { name: "ليفوفلوكساسين", concentration: 250, dosePerKg: 10 },
+    { name: "توبيراميت", concentration: 25, dosePerKg: 1 },
+    { name: "فينلافاكسين", concentration: 37.5, dosePerKg: 1 }
+  ];
+
+  const drugSelect = document.getElementById('drug');
+  drugs.forEach((drug, i) => {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = `${drug.name} – تركيز: ${drug.concentration} مجم/5 مل`;
+    drugSelect.appendChild(option);
+  });
+
+  function calculateDose() {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const doseInput = parseFloat(document.getElementById('dosePerKg').value);
+    const selectedDrug = drugs[drugSelect.value];
+    const dosePerKg = doseInput || selectedDrug.dosePerKg;
+    const totalMg = dosePerKg * weight;
+    const concentration = selectedDrug.concentration;
+    const doseMl = concentration > 0 ? (totalMg * 5 / concentration).toFixed(1) : "غير متاح (لا يوجد تركيز)";
+    document.getElementById('doseResult').innerHTML =
+      `💊 الجرعة: ${totalMg.toFixed(1)} ملجم<br>📏 تعادل: ${doseMl} مل`;
+  }
+
+  function copyDose() {
+    const text = document.getElementById('doseResult').textContent;
+    navigator.clipboard.writeText(text).then(() => alert("✅ تم نسخ الجرعة!"));
+  }
+</script>
+
+</body>
+</html>
