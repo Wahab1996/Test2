@@ -1,20 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-    <title>ذكر وحاسبة</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أذكار اليومية مع الحاسبة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .dhikr-box {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .dhikr-box:hover {
+            transform: translateY(-5px);
+        }
+        .dhikr-text {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .fadl-text {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            color: #8b0000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .counter-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        #counter-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #27ae60;
+            min-width: 80px;
+            text-align: center;
+        }
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .reset-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+        @media (max-width: 480px) {
+            .dhikr-text { font-size: 1.2em; }
+            .counter-section { flex-direction: column; gap: 15px; }
+            h1 { font-size: 1.6em; }
+        }
+    </style>
 </head>
 <body>
-    <h2>سبحان الله وبحمده</h2>
-    <p>فضل الذكر: تحط الخطايا وإن كانت مثل زبد البحر.</p>
-    
-    <button onclick="incrementCounter()">حساب</button>
-    <p>عدد الذكر: <span id="counter">0</span></p>
+    <div class="container">
+        <h1>📿 أذكار مباركة مع حاسبة 📿</h1>
+        
+        <div class="dhikr-box" id="dhikr1">
+            <div class="dhikr-text">سبحان الله وبحمده</div>
+            <div class="fadl-text">تحط الخطايا وإن كانت مثل زبد البحر (100 مرة) [web:17][web:6]</div>
+            <div class="counter-section">
+                <div>التكرار: <span id="counter1">0</span></div>
+                <button class="btn" onclick="incrementCounter(1)">تسبيح ☝️</button>
+            </div>
+            <button class="btn reset-btn" onclick="resetCounter(1)">إعادة العد</button>
+        </div>
+
+        <div class="dhikr-box" id="dhikr2">
+            <div class="dhikr-text">اللّهُ لا إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ</div>
+            <div class="fadl-text">أعظم آية في القرآن، تحفظ من الشيطان وتدخل الجنة [web:13][web:23]</div>
+            <div class="counter-section">
+                <div>التكرار: <span id="counter2">0</span></div>
+                <button class="btn" onclick="incrementCounter(2)">آية الكرسي 🛡️</button>
+            </div>
+            <button class="btn reset-btn" onclick="resetCounter(2)">إعادة العد</button>
+        </div>
+
+        <div class="dhikr-box" id="dhikr3">
+            <div class="dhikr-text">لا إله إلا الله وحده لا شريك له</div>
+            <div class="fadl-text">أفضل الذكر، تعدل عتق عشر رقاب وتكفر خطايا السنة [web:14][web:19]</div>
+            <div class="counter-section">
+                <div>التكرار: <span id="counter3">0</span></div>
+                <button class="btn" onclick="incrementCounter(3)">تهليل 🌟</button>
+            </div>
+            <button class="btn reset-btn" onclick="resetCounter(3)">إعادة العد</button>
+        </div>
+
+        <div class="dhikr-box" id="dhikr4">
+            <div class="dhikr-text">لا حول ولا قوة إلا بالله</div>
+            <div class="fadl-text">كنز من كنوز الجنة، تشرح الصدر وتزيل الهم [web:11]</div>
+            <div class="counter-section">
+                <div>التكرار: <span id="counter4">0</span></div>
+                <button class="btn" onclick="incrementCounter(4)">الحوقلة 💎</button>
+            </div>
+            <button class="btn reset-btn" onclick="resetCounter(4)">إعادة العد</button>
+        </div>
+    </div>
 
     <script>
-        let count = 0;
-        function incrementCounter() {
-            count++;
-            document.getElementById('counter').innerText = count;
+        let counters = [0, 0, 0, 0];
+
+        function incrementCounter(index) {
+            counters[index - 1]++;
+            document.getElementById('counter' + index).innerText = counters[index - 1];
+        }
+
+        function resetCounter(index) {
+            counters[index - 1] = 0;
+            document.getElementById('counter' + index).innerText = 0;
         }
     </script>
 </body>
