@@ -3,6 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PWA Icons & Manifest -->
+    <link rel="manifest" href="application/manifest+json,{
+        \"name\": \"أذكار اليومية\",
+        \"short_name\": \"أذكار\",
+        \"description\": \"حاسبة أذكار مباركة مع فضائلها\",
+        \"scope\": \"/\",
+        \"start_url\": \"/\",
+        \"display\": \"standalone\",
+        \"background_color\": \"#667eea\",
+        \"theme_color\": \"#764ba2\",
+        \"icons\": [
+            {
+                \"src\": \"image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijk2IiBmaWxsPSIjNjY3ZWVhIi8+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijc4IiBmaWxsPSIjNzc0YmEyIi8+CjxwYXRoIGQ9Ik0xMjAgMTAwTDk2IDEyNEw3MiAxMDBaIiBmaWxsPSIjZmZmIi8+Cjx0ZXh0IHg9Ijk2IiB5PSIxMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7igIhmPC90ZXh0Pgo8L3N2Zz4=\",
+                \"sizes\": \"192x192\",
+                \"type\": \"image/svg+xml\"
+            },
+            {
+                \"src\": \"image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjU2IiBmaWxsPSIjNjY3ZWVhIi8+CjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjA4IiBmaWxsPSIjNzc0YmEyIi8+CjxwYXRoIGQ9Ik0zMjAgMjY0TDI1NiAzMzZMMjA4IDI2NFoiIGZpbGw9IiNmZmYi8+Cjx0ZXh0IHg9IjI1NiIgeT0iMzIwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iODAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+📿PC90ZXh0Pgo8L3N2Zz4=\",
+                \"sizes\": \"512x512\",
+                \"type\": \"image/svg+xml\"
+            }
+        ]
+    }">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="أذكار">
+    <link rel="apple-touch-icon" href="image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijk2IiBmaWxsPSIjNjY3ZWVhIi8+CjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijc4IiBmaWxsPSIjNzc0YmEyIi8+CjxwYXRoIGQ9Ik0xMjAgMTAwTDk2IDEyNEw3MiAxMDBaIiBmaWxsPSIjZmZmIi8+Cjx0ZXh0IHg9Ijk2IiB5PSIxMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7igIhmPC90ZXh0Pgo8L3N2Zz4=">
     <title>أذكار اليومية مع الحاسبة</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -191,6 +218,11 @@
         function resetCounter(index) {
             counters[index - 1] = 0;
             document.getElementById('counter' + index).innerText = 0;
+        }
+
+        // PWA Service Worker (اختياري)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('application/javascript;base64,d2lmKCdzZXJ2aWNlV29ya2VyJyBpbiBuYXZpZ2F0b3IpIHsKICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsICgpID0+IHsKICAgIG5hdmlnYXRvci5zZXJ2aWNlV29ya2VyLnJlZ2lzdGVyKCdkaWRudXNlZytwbGFjZWhvbGRlcicpLgpJfQ==');
         }
     </script>
 </body>
