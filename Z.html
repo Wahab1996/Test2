@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ملصق الوقاية من الأمراض المنقولة بالجنس</title>
+    <title>أذكار بعد الصلوات</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap');
         
         * {
             margin: 0;
@@ -14,235 +14,257 @@
         }
         
         body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #00b4d8 100%);
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #1a5f7a 0%, #2c7744 50%, #56ab2f 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow-x: auto;
         }
         
         .poster {
-            max-width: 900px;
+            max-width: 850px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
             border-radius: 25px;
             box-shadow: 0 30px 80px rgba(0,0,0,0.4);
             overflow: hidden;
             position: relative;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 4px solid rgba(255,255,255,0.3);
         }
         
         .header {
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            padding: 20px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ff8c00);
+            padding: 25px;
             text-align: center;
             position: relative;
         }
         
-        .header::after {
-            content: '';
+        .header::before {
+            content: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: rgba(255,255,255,0.8);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #d63031;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .main-title {
-            font-size: 2.2rem;
+            font-family: 'Cairo', sans-serif;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: #2c3e50;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, #d63031, #e17055, #ff7675);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.4rem;
-            color: #34495e;
-            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
         .image-section {
+            padding: 30px;
             text-align: center;
-            padding: 30px 20px;
             background: linear-gradient(45deg, #f8f9fa, #e9ecef);
         }
         
         .poster-image {
             max-width: 100%;
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-        }
-        
-        .content-section {
-            padding: 40px 30px;
-            line-height: 1.8;
-        }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
             border-radius: 20px;
-            margin: 25px 0;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
         }
         
-        .highlight-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
+        .content {
+            padding: 40px 35px;
         }
         
-        .highlight-text {
-            font-size: 1.2rem;
-            opacity: 0.95;
-        }
-        
-        .methods-grid {
+        .dhikr-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin: 40px 0;
+            margin: 30px 0;
         }
         
-        .method-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 5px solid #3498db;
-            transition: transform 0.3s ease;
+        .dhikr-card {
+            background: rgba(255,255,255,0.8);
+            border: 2px solid rgba(214, 48, 49, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
-        .method-card:hover {
-            transform: translateY(-5px);
+        .dhikr-card::before {
+            content: '﷽';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #d63031;
+            font-family: 'Cairo', sans-serif;
         }
         
-        .method-title {
-            font-size: 1.3rem;
+        .dhikr-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(214, 48, 49, 0.2);
+            border-color: #d63031;
+        }
+        
+        .arabic-text {
+            font-size: 1.6rem;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            direction: rtl;
         }
         
-        .method-desc {
-            color: #555;
+        .transliteration {
             font-size: 1rem;
+            color: #7f8c8d;
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
         
-        .warning-box {
-            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            color: white;
-            padding: 20px;
+        .meaning {
+            font-size: 1.1rem;
+            color: #34495e;
+            font-style: italic;
+            border-right: 4px solid #27ae60;
+            padding-right: 15px;
+        }
+        
+        .reward {
+            background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+            margin-top: 20px;
+            padding: 15px;
             border-radius: 15px;
-            margin: 30px 0;
-            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e8449;
+            border-left: 5px solid #27ae60;
         }
         
         .footer {
-            background: #2c3e50;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
         }
         
         .footer-text {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 15px;
+            font-family: 'Cairo', sans-serif;
         }
         
-        .contact-info {
+        .source {
             font-size: 1rem;
             opacity: 0.9;
+            font-style: italic;
         }
         
         @media (max-width: 768px) {
             .main-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
-            .content-section {
-                padding: 25px 20px;
-            }
-            
-            .methods-grid {
+            .dhikr-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 25px 20px;
             }
         }
         
         @media print {
             body { background: white; }
             .poster { box-shadow: none; max-width: none; }
+            .dhikr-card:hover { transform: none; }
         }
     </style>
 </head>
 <body>
     <div class="poster">
-        <!-- العنوان الرئيسي -->
+        <!-- الهيدر -->
         <div class="header">
-            <h1 class="main-title">الوقاية من الأمراض المنقولة بالجنس</h1>
-            <p class="subtitle">أهمية الفحص الدوري والكشف المبكر</p>
+            <h1 class="main-title">أذكار بعد الصلوات</h1>
+            <p style="font-size: 1.3rem; font-weight: 600; color: #2c3e50;">﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾</p>
         </div>
         
-        <!-- قسم الصورة -->
+        <!-- الصورة الأصلية -->
         <div class="image-section">
-            <img src="image.jpeg" alt="ملصق طبي" class="poster-image" [file:2]>
+            <img src="image.jpeg" alt="أذكار بعد الصلوات" class="poster-image" [file:2]>
         </div>
         
         <!-- المحتوى الرئيسي -->
-        <div class="content-section">
-            <div class="highlight-box">
-                <h2 class="highlight-title">⚠️ الوقاية خير من العلاج</h2>
-                <p class="highlight-text">الفحوصات الدورية تحميك وتحمي شريكك</p>
-            </div>
-            
-            <div class="methods-grid">
-                <div class="method-card">
-                    <h3 class="method-title">استخدام الواقي الذكري</h3>
-                    <p class="method-desc">يقلل من خطر الإصابة بنسبة تصل إلى 90% من الأمراض المنقولة جنسياً</p>
+        <div class="content">
+            <div class="dhikr-grid">
+                <div class="dhikr-card">
+                    <div class="arabic-text">
+                        أَسْتَغْفِرُ اللَّهَ
+                    </div>
+                    <div class="transliteration">Astaghfirullah</div>
+                    <div class="meaning">أغفر لي ربي وأتوب إليه</div>
+                    <div class="reward">ثلاث مرات</div>
                 </div>
                 
-                <div class="method-card">
-                    <h3 class="method-title">الفحص الدوري</h3>
-                    <p class="method-desc">كل 3-6 أشهر حسب مستوى الخطورة والتعرض</p>
+                <div class="dhikr-card">
+                    <div class="arabic-text">
+                        اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ
+                    </div>
+                    <div class="transliteration">Allahumma Antas-Salam wa minka as-salam</div>
+                    <div class="meaning">تباركت يا ذا الجلال والإكرام</div>
+                    <div class="reward">مرة واحدة</div>
                 </div>
                 
-                <div class="method-card">
-                    <h3 class="method-title">التطعيم</h3>
-                    <p class="method-desc">لقاح HPV و Hepatitis B متاح وفعال</p>
+                <div class="dhikr-card">
+                    <div class="arabic-text">
+                        اللَّهُمَّ اجْعَلْنِي مِنَ الشَّاكِرِينَ
+                    </div>
+                    <div class="transliteration">Allahumma ij'alni minash-shakirin</div>
+                    <div class="meaning">والمحسنين والمتواضعين</div>
+                    <div class="reward">ثلاث مرات</div>
                 </div>
                 
-                <div class="method-card">
-                    <h3 class="method-title">علاج الشريك</h3>
-                    <p class="method-desc">علاج متزامن للأمراض البكتيرية لمنع إعادة العدوى</p>
+                <div class="dhikr-card">
+                    <div class="arabic-text">
+                        اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ
+                    </div>
+                    <div class="transliteration">Allahumma inni a'uzu bika min al-kufri</div>
+                    <div class="meaning">والفقر والذنب ومعصية الوالدين</div>
+                    <div class="reward">ثلاث مرات</div>
                 </div>
             </div>
             
-            <div class="warning-box">
-                <h3>لا تتردد في طلب المساعدة الطبية</h3>
-                <p>الكشف المبكر ينقذ الأرواح ويحافظ على الصحة</p>
+            <div style="background: linear-gradient(135deg, #fdcb6e, #e17055); padding: 25px; border-radius: 20px; text-align: center; margin: 30px 0;">
+                <h3 style="color: #2c3e50; font-size: 1.5rem; margin-bottom: 15px;">فضل الأذكار</h3>
+                <p style="font-size: 1.2rem; color: #34495e; font-weight: 600;">
+                    من قالها بعد كل صلاة دخل الجنة
+                </p>
             </div>
-            
-            <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #2c3e50; margin: 30px 0;">
-                الفحص مجاني وسري في جميع المراكز الصحية
-            </p>
         </div>
         
         <!-- الفوتر -->
         <div class="footer">
             <div class="footer-text">
-                وزارة الصحة - مديرية الصحة العامة
+                📿 حَفِظْتُهَا فِي قَلْبِي وَلِسَانِي
             </div>
-            <div class="contact-info">
-                📞 937 | www.moh.gov.sa | آخر تحديث: 1446هـ/2025م
+            <div class="source">
+                رواه مسلم | شارك الخير 🌸
             </div>
         </div>
     </div>
