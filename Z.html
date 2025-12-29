@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ملصق طبي أنيق</title>
+    <title>ملصق الوقاية من الأمراض المنقولة بالجنس</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
         
         * {
             margin: 0;
@@ -14,143 +14,235 @@
         }
         
         body {
-            font-family: 'Noto Sans Arabic', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #00b4d8 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-x: auto;
         }
         
         .poster {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
             overflow: hidden;
             position: relative;
-            animation: fadeIn 1s ease-out;
+            border: 3px solid rgba(255,255,255,0.3);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .header {
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            padding: 20px;
+            text-align: center;
+            position: relative;
         }
         
-        .poster::before {
+        .header::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            height: 4px;
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: #34495e;
+            font-weight: 600;
+        }
+        
+        .image-section {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
         }
         
         .poster-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
         }
         
-        .content {
-            padding: 40px;
+        .content-section {
+            padding: 40px 30px;
+            line-height: 1.8;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .highlight-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-text {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .method-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .method-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .method-desc {
+            color: #555;
+            font-size: 1rem;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
             text-align: center;
         }
         
-        .title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: inline-block;
-            font-size: 1.8rem;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(168, 237, 234, 0.4);
-        }
-        
-        .description {
-            font-size: 1.3rem;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-        
         .footer {
-            border-top: 2px solid #ecf0f1;
-            padding-top: 30px;
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .contact {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-        }
-        
-        .date {
-            background: #3498db;
+            background: #2c3e50;
             color: white;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 700;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            font-size: 1rem;
+            opacity: 0.9;
         }
         
         @media (max-width: 768px) {
-            .poster {
-                margin: 10px;
-                border-radius: 15px;
+            .main-title {
+                font-size: 1.8rem;
             }
             
-            .title {
-                font-size: 2rem;
+            .content-section {
+                padding: 25px 20px;
             }
             
-            .highlight {
-                font-size: 1.4rem;
+            .methods-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .content {
-                padding: 30px 20px;
-            }
-            
-            .footer {
-                flex-direction: column;
-                text-align: center;
-            }
+        }
+        
+        @media print {
+            body { background: white; }
+            .poster { box-shadow: none; max-width: none; }
         }
     </style>
 </head>
 <body>
     <div class="poster">
-        <img src="image.jpeg" alt="الملصق الطبي" class="poster-image" [file:2]>
-        <div class="content">
-            <h1 class="title">عنوان الملصق الطبي الرئيسي</h1>
-            <div class="highlight">نص مميز هنا</div>
-            <p class="description">
-                هذا وصف مختصر وأنيق للملصق الطبي. يمكنك تعديل النصوص حسب الحاجة.
-                التصميم متجاوب ويعمل على جميع الأجهزة بشكل مثالي.
-            </p>
-            <div class="footer">
-                <div class="contact">
-                    📞 966-500-000-000 | ✉️ info@clinic.sa
+        <!-- العنوان الرئيسي -->
+        <div class="header">
+            <h1 class="main-title">الوقاية من الأمراض المنقولة بالجنس</h1>
+            <p class="subtitle">أهمية الفحص الدوري والكشف المبكر</p>
+        </div>
+        
+        <!-- قسم الصورة -->
+        <div class="image-section">
+            <img src="image.jpeg" alt="ملصق طبي" class="poster-image" [file:2]>
+        </div>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="content-section">
+            <div class="highlight-box">
+                <h2 class="highlight-title">⚠️ الوقاية خير من العلاج</h2>
+                <p class="highlight-text">الفحوصات الدورية تحميك وتحمي شريكك</p>
+            </div>
+            
+            <div class="methods-grid">
+                <div class="method-card">
+                    <h3 class="method-title">استخدام الواقي الذكري</h3>
+                    <p class="method-desc">يقلل من خطر الإصابة بنسبة تصل إلى 90% من الأمراض المنقولة جنسياً</p>
                 </div>
-                <div class="date">29 ديسمبر 2025</div>
+                
+                <div class="method-card">
+                    <h3 class="method-title">الفحص الدوري</h3>
+                    <p class="method-desc">كل 3-6 أشهر حسب مستوى الخطورة والتعرض</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3 class="method-title">التطعيم</h3>
+                    <p class="method-desc">لقاح HPV و Hepatitis B متاح وفعال</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3 class="method-title">علاج الشريك</h3>
+                    <p class="method-desc">علاج متزامن للأمراض البكتيرية لمنع إعادة العدوى</p>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h3>لا تتردد في طلب المساعدة الطبية</h3>
+                <p>الكشف المبكر ينقذ الأرواح ويحافظ على الصحة</p>
+            </div>
+            
+            <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #2c3e50; margin: 30px 0;">
+                الفحص مجاني وسري في جميع المراكز الصحية
+            </p>
+        </div>
+        
+        <!-- الفوتر -->
+        <div class="footer">
+            <div class="footer-text">
+                وزارة الصحة - مديرية الصحة العامة
+            </div>
+            <div class="contact-info">
+                📞 937 | www.moh.gov.sa | آخر تحديث: 1446هـ/2025م
             </div>
         </div>
     </div>
