@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أذكار اليومية مع الحاسبة</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -17,16 +13,24 @@
             padding: 20px;
             color: #333;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .container { max-width: 600px; margin: 0 auto; }
         h1 {
             text-align: center;
             color: white;
             margin-bottom: 30px;
             font-size: 2em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .vibration-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
         }
         .dhikr-box {
             background: white;
@@ -36,9 +40,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
         }
-        .dhikr-box:hover {
-            transform: translateY(-5px);
-        }
+        .dhikr-box:hover { transform: translateY(-5px); }
         .dhikr-text {
             font-size: 1.4em;
             font-weight: bold;
@@ -64,13 +66,6 @@
             border-radius: 15px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
         }
-        #counter-display {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #27ae60;
-            min-width: 80px;
-            text-align: center;
-        }
         .btn {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
@@ -82,14 +77,10 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
-        .btn:active {
-            transform: scale(0.95);
-        }
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
+        .btn:active { transform: scale(0.95); }
+        .btn:hover:not(:active) { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
         .reset-btn {
             background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             margin-top: 10px;
@@ -100,49 +91,53 @@
             .dhikr-text { font-size: 1.2em; }
             .counter-section { flex-direction: column; gap: 15px; }
             h1 { font-size: 1.6em; }
+            .vibration-status { left: 10px; top: 10px; font-size: 0.8em; }
         }
     </style>
 </head>
 <body>
+    <div class="vibration-status" id="vibrationStatus">📱 Vibration: جاري التحقق...</div>
+    
     <div class="container">
         <h1>📿 أذكار مباركة مع حاسبة 📿</h1>
         
-        <div class="dhikr-box" id="dhikr1">
+        <!-- نفس الأذكار السابقة -->
+        <div class="dhikr-box">
             <div class="dhikr-text">سبحان الله وبحمده</div>
-            <div class="fadl-text">تحط الخطايا وإن كانت مثل زبد البحر (100 مرة) [web:17][web:6]</div>
+            <div class="fadl-text">تحط الخطايا وإن كانت مثل زبد البحر (100 مرة)</div>
             <div class="counter-section">
                 <div>التكرار: <span id="counter1">0</span></div>
-                <button class="btn" onclick="incrementCounter(1)">تسبيح ☝️</button>
+                <button class="btn" ontouchstart="handleTouch(1)" onclick="incrementCounter(1)">تسبيح ☝️</button>
             </div>
             <button class="btn reset-btn" onclick="resetCounter(1)">إعادة العد</button>
         </div>
 
-        <div class="dhikr-box" id="dhikr2">
+        <div class="dhikr-box">
             <div class="dhikr-text">اللّهُ لا إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ</div>
-            <div class="fadl-text">أعظم آية في القرآن، تحفظ من الشيطان وتدخل الجنة [web:13][web:23]</div>
+            <div class="fadl-text">أعظم آية في القرآن، تحفظ من الشيطان</div>
             <div class="counter-section">
                 <div>التكرار: <span id="counter2">0</span></div>
-                <button class="btn" onclick="incrementCounter(2)">آية الكرسي 🛡️</button>
+                <button class="btn" ontouchstart="handleTouch(2)" onclick="incrementCounter(2)">آية الكرسي 🛡️</button>
             </div>
             <button class="btn reset-btn" onclick="resetCounter(2)">إعادة العد</button>
         </div>
 
-        <div class="dhikr-box" id="dhikr3">
+        <div class="dhikr-box">
             <div class="dhikr-text">لا إله إلا الله وحده لا شريك له</div>
-            <div class="fadl-text">أفضل الذكر، تعدل عتق عشر رقاب وتكفر خطايا السنة [web:14][web:19]</div>
+            <div class="fadl-text">أفضل الذكر، تعدل عتق عشر رقاب</div>
             <div class="counter-section">
                 <div>التكرار: <span id="counter3">0</span></div>
-                <button class="btn" onclick="incrementCounter(3)">تهليل 🌟</button>
+                <button class="btn" ontouchstart="handleTouch(3)" onclick="incrementCounter(3)">تهليل 🌟</button>
             </div>
             <button class="btn reset-btn" onclick="resetCounter(3)">إعادة العد</button>
         </div>
 
-        <div class="dhikr-box" id="dhikr4">
+        <div class="dhikr-box">
             <div class="dhikr-text">لا حول ولا قوة إلا بالله</div>
-            <div class="fadl-text">كنز من كنوز الجنة، تشرح الصدر وتزيل الهم [web:11]</div>
+            <div class="fadl-text">كنز من كنوز الجنة، تشرح الصدر</div>
             <div class="counter-section">
                 <div>التكرار: <span id="counter4">0</span></div>
-                <button class="btn" onclick="incrementCounter(4)">الحوقلة 💎</button>
+                <button class="btn" ontouchstart="handleTouch(4)" onclick="incrementCounter(4)">الحوقلة 💎</button>
             </div>
             <button class="btn reset-btn" onclick="resetCounter(4)">إعادة العد</button>
         </div>
@@ -150,29 +145,61 @@
 
     <script>
         let counters = [0, 0, 0, 0];
+        let vibrationEnabled = false;
 
-        function vibrate() {
-            if (navigator.vibrate) {
-                navigator.vibrate(50); // Vibration خفيفة 50ms
+        // طلب إذن الاهتزاز
+        function requestVibrationPermission() {
+            if ('vibrate' in navigator) {
+                // لـ iOS Safari: نحتاج نستخدم الـ haptic feedback
+                navigator.vibrate(0); // Test vibration
+                setTimeout(() => {
+                    vibrationEnabled = true;
+                    updateVibrationStatus('✅ مفعّل');
+                }, 100);
+            } else {
+                updateVibrationStatus('❌ غير مدعوم');
             }
         }
 
+        function updateVibrationStatus(status) {
+            document.getElementById('vibrationStatus').textContent = '📱 Vibration: ' + status;
+        }
+
+        function vibratePattern() {
+            if (vibrationEnabled && 'vibrate' in navigator) {
+                // نمط اهتزاز جميل: قصير وقوي
+                navigator.vibrate([30, 10, 50]);
+            }
+        }
+
+        function handleTouch(index) {
+            vibratePattern();
+        }
+
         function incrementCounter(index) {
-            vibrate();
+            vibratePattern();
             counters[index - 1]++;
             document.getElementById('counter' + index).innerText = counters[index - 1];
         }
 
         function resetCounter(index) {
-            vibrate();
+            vibratePattern();
             counters[index - 1] = 0;
             document.getElementById('counter' + index).innerText = 0;
         }
 
-        // Vibration عند الضغط على الشاشة (لمس)
-        document.addEventListener('touchstart', function() {
-            vibrate();
-        }, { passive: true });
+        // تشغيل عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            requestVibrationPermission();
+            
+            // للـ iOS Safari: نحتاج لمس لتفعيل
+            document.addEventListener('touchstart', function(e) {
+                if (!vibrationEnabled) {
+                    requestVibrationPermission();
+                }
+                vibratePattern();
+            }, { passive: true });
+        });
     </script>
 </body>
 </html>
